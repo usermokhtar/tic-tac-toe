@@ -2,22 +2,18 @@ import React, { useState } from 'react';
 
 const Player = ({ name: initialName, symbol, isActive }) => {
   const [isEditing, setIsEditing] = useState(false);
-  const [editLabel, setEditLabel] = useState('Edit');
   const [name, setName] = useState(initialName);
 
   const handleEditToggle = () => {
-    setEditLabel(isEditing ? 'Edit' : 'Save');
     setIsEditing(!isEditing);
   };
 
   const handleNameChange = (event) => {
-    if (isEditing) {
-      setName(event.target.value);
-    }
+    setName(event.target.value);
   };
 
   return (
-    <li className={isActive ? 'active' : undefined}>
+    <li className={isActive ? 'active' : ''}>
       <span id='player'>
         {isEditing ? (
           <input
@@ -31,7 +27,7 @@ const Player = ({ name: initialName, symbol, isActive }) => {
         )}
         <span className='player-symbol'>{symbol}</span>
       </span>
-      <button onClick={handleEditToggle}>{editLabel}</button>
+      <button onClick={handleEditToggle}>{isEditing ? 'Save' : 'Edit'}</button>
     </li>
   );
 };

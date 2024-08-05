@@ -1,13 +1,20 @@
 import React from 'react';
 
-const Log = ({ turns }) => {
+const Log = ({ board }) => {
   return (
     <ol id='log'>
-      {turns.map((turn, index) => (
-        <li key={index}>
-          {turn.player} selected ({turn.square.row}, {turn.square.col})
-        </li>
-      ))}
+      {board.map((row, rowIndex) =>
+        row.map((cell, colIndex) => {
+          if (cell !== null) {
+            return (
+              <li key={`${rowIndex}-${colIndex}`}>
+                {cell} selected ({rowIndex}, {colIndex})
+              </li>
+            );
+          }
+          return null; // return null for cells that haven't been played yet
+        })
+      )}
     </ol>
   );
 };
