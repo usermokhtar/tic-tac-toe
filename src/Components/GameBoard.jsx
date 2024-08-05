@@ -25,7 +25,10 @@ const GameBoard = ({ onHandelSquer, turns }) => {
           <ol>
             {row.map((cell, colIndex) => (
               <li key={colIndex}>
-                <button onClick={() => onHandelSquer(rowIndex, colIndex)}>
+                <button
+                  onClick={() => onHandelSquer(rowIndex, colIndex)}
+                  disabled={cell !== null}
+                >
                   {cell}
                 </button>
               </li>
