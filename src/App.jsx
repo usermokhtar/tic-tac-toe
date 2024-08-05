@@ -4,9 +4,23 @@ import GameBoard from './Components/GameBoard';
 import { useState } from 'react';
 function App() {
   const [currentPlayer, setCurrentPlayer] = useState('X');
-  function handelsquer() {
+  const [GameTurns, setGameTurns] = useState([]);
+  function handelsquer(rowIndex, colIndex) {
     setCurrentPlayer(currentPlayer === 'X' ? 'O' : 'X');
-    // add logic for checking win, draw and switching player
+    setGameTurns((prevGameTurns) => {
+      let activePlayer = 'X';
+      if (
+        prevGameTurns.length > 0 &&
+        prevGameTurns[0].player === activePlayer
+      ) {
+        activePlayer = 'O';
+      }
+      const updatedGameTurns = [
+        { square: { row: rowIndex, col: colIndex }, player: currentPlayer },
+        ...prevGameTurns,
+      ];
+      return updatedGameTurns;
+    });
   }
   return (
     <>
@@ -25,10 +39,7 @@ function App() {
               isActive={currentPlayer === '0'}
             />
           </ol>
-          <GameBoard
-            onHandelSquer={handelsquer}
-            activePlayerSymbol={currentPlayer}
-          />
+          <GameBoard onHandelSquer={handelsquer} turns={GameTurns} />
         </div>
       </main>
     </>
