@@ -1,6 +1,7 @@
 import Header from './Components/Header';
 import Player from './Components/Player';
 import GameBoard from './Components/GameBoard';
+import Log from './Components/Log';
 import { useState } from 'react';
 function App() {
   const [currentPlayer, setCurrentPlayer] = useState('X');
@@ -41,6 +42,7 @@ function App() {
           </ol>
           <GameBoard onHandelSquer={handelsquer} turns={GameTurns} />
         </div>
+        <Log turns={GameTurns} />
       </main>
     </>
   );
