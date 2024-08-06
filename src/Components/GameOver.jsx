@@ -4,7 +4,8 @@ const GameOver = ({ winner }) => {
   return (
     <div id='game-over'>
       <h2>Game Over!</h2>
-      <p>{winner} won !</p>
+      {winner && <p>{winner} won !</p>}
+      {!winner && <p>it's a draw</p>}
       <p>
         <button>Remacht!</button>
       </p>
