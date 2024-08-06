@@ -3,6 +3,7 @@ import Player from './Components/Player';
 import GameBoard from './Components/GameBoard';
 import Log from './Components/Log';
 import { WINNING_COMBINATIONS } from './Components/WINNING_COMBINATIONS';
+import GameOver from './Components/GameOver';
 import { useState, useEffect } from 'react';
 
 const initGameBoard = [
@@ -72,7 +73,7 @@ function App() {
             <Player name='Player1' symbol='X' isActive={activePlayer === 'X'} />
             <Player name='Player2' symbol='O' isActive={activePlayer === 'O'} />
           </ol>
-          {winner && <div>You won, {winner}!</div>}
+          {winner && <GameOver winner={winner} />}
           <GameBoard onSquareClick={handleSquareClick} board={gameBoard} />
         </div>
         <Log board={gameBoard} />
