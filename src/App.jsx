@@ -63,7 +63,7 @@ function App() {
       }
     }
   }
-
+  const hasDraw = gameTurns.length === 9 && !winner;
   return (
     <>
       <Header />
@@ -73,7 +73,7 @@ function App() {
             <Player name='Player1' symbol='X' isActive={activePlayer === 'X'} />
             <Player name='Player2' symbol='O' isActive={activePlayer === 'O'} />
           </ol>
-          {winner && <GameOver winner={winner} />}
+          {(winner || hasDraw) && <GameOver winner={winner} />}
           <GameBoard onSquareClick={handleSquareClick} board={gameBoard} />
         </div>
         <Log board={gameBoard} />
