@@ -2,7 +2,7 @@ import Header from './Components/Header';
 import Player from './Components/Player';
 import GameBoard from './Components/GameBoard';
 import Log from './Components/Log';
-import { WINNING_COMBINATIONS } from './Components/WINNING_COMBINATIONS';
+import { WINNING_COMBINATIONS } from './Components/WINNING_COMBINATIONS'; // Assuming it's moved to a constants directory
 import GameOver from './Components/GameOver';
 import { useState, useEffect } from 'react';
 
@@ -63,7 +63,21 @@ function App() {
       }
     }
   }
+
   const hasDraw = gameTurns.length === 9 && !winner;
+
+  const handleRestart = () => {
+    setGameBoard([
+      [null, null, null],
+      [null, null, null],
+      [null, null, null],
+    ]);
+    setGameTurns([]);
+    setActivePlayer('X');
+    setWinner(null);
+    console.log('Game reset');
+  };
+
   return (
     <>
       <Header />
@@ -73,7 +87,9 @@ function App() {
             <Player name='Player1' symbol='X' isActive={activePlayer === 'X'} />
             <Player name='Player2' symbol='O' isActive={activePlayer === 'O'} />
           </ol>
-          {(winner || hasDraw) && <GameOver winner={winner} />}
+          {(winner || hasDraw) && (
+            <GameOver winner={winner} onRematch={handleRestart} />
+          )}
           <GameBoard onSquareClick={handleSquareClick} board={gameBoard} />
         </div>
         <Log board={gameBoard} />
